@@ -19,10 +19,13 @@ You can use the REST API directly, assuming that the server name is `consul.serv
 
     require 'net/http'
     require 'json'
-    uri = URI('http://consul:8500/v1/catalog/service/redis')
+    consul = ENV['CONSUL'] || 'consul'
+    uri = URI("http://#{consul}:8500/v1/catalog/service/redis")
     json = Net::HTTP.get(uri)
     hash = JSON.parse(json)
     => [{"Node"=>"dev", "Address"=>"172.16.57.156", "ServiceID"=>"dev:redis:6379", "ServiceName"=>"redis", "ServiceTags"=>nil, "ServicePort"=>6379}]
+
+If you are developing on your laptop, you can set the environment variable `CONSUL` to the IP address of the vagrant box running `consul`.
 
 ## Image debugging
 
