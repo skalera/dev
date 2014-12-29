@@ -24,5 +24,15 @@ You can use the REST API directly, assuming that the server name is `consul.serv
     hash = JSON.parse(json)
     => [{"Node"=>"dev", "Address"=>"172.16.57.156", "ServiceID"=>"dev:redis:6379", "ServiceName"=>"redis", "ServiceTags"=>nil, "ServicePort"=>6379}]
 
+## Image debugging
+
+If you want a shell inside a container, use
+
+    docker run -it --rm progrium/busybox sh
+
+if you need additional packages (busybox is stripped down) use `opkg-install`, e.g. to get `curl`
+
+    opkg-install curl
+
 ## VM template
 The VM is built using `packer` and [this configuration](https://github.com/skalera/packer-dev)
