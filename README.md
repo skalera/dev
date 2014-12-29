@@ -1,19 +1,28 @@
 # Skalera development VM
 
-Use this VM for development. It comes with `docker` plus `progrium/consul` and `progrium/registrator`.
+Use this VM for Skalera development. It comes with `docker` plus the `progrium/consul` and `progrium/registrator` images, and has DNS configured for all containers so that it can lookup services in `consul`.
 
-It auto-registers the published ports of all `docker` containers, which then can be accessed through `consul`
-using the REST API, e.g.
+It auto-registers the published ports of all `docker` containers, which then can be accessed through `consul` using the DNS or REST API.
 
-    curl http://172.16.57.156:8500/v1/catalog/service/redis
-    [{"Node":"dev","Address":"172.16.57.156","ServiceID":"dev:redis:6379","ServiceName":"redis","ServiceTags":null,"ServicePort":6379}]
+## DNS API
 
-or using the DNS API
+Do a DNS SRV query to get the name of the consul instance (which should be `consul.services.consul.`)
 
     require 'resolv'
-    # the VM should be setup with DNS resolving, so localhost (127.0.0.1) can be used
-    resolver = Resolv::DNS.new(nameserver: ['172.16.57.156'], search: ['service.consul'], ndot: 1)
-    redis = resolver.getresource('redis', Resolv::DNS::Resource::IN::SRV)
+    resolver = Resolv::DNS.new
+    consul = resolver.getresource('consul', Resolv::DNS::Resource::IN::SRV)
+    => #<Resolv::DNS::Resource::IN::SRV:0x007fe6d41b15d0 @port=6379, @priority=1, @target=#<Resolv::DNS::Name: dev.node.dc1.consul.>, @ttl=0, @weight=1>
+
+## REST API
+
+You can use the REST API directly, assuming that the server name is `consul.service.consul`
+
+    require 'net/http'
+    require 'json'
+    uri = URI('http://consul:8500/v1/catalog/service/redis')
+    json = Net::HTTP.get(uri)
+    hash = JSON.parse(json)
+    => [{"Node"=>"dev", "Address"=>"172.16.57.156", "ServiceID"=>"dev:redis:6379", "ServiceName"=>"redis", "ServiceTags"=>nil, "ServicePort"=>6379}]
 
 ## VM template
 The VM is built using `packer` and [this configuration](https://github.com/skalera/packer-dev)
