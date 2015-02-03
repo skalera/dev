@@ -7,6 +7,8 @@ IP=`ifconfig eth1 | grep 'inet addr' | sed 's/.*addr:\([0-9.]*\) .*/\1/'`
 # make sure all containers can do DNS lookups through consul
 echo "DOCKER_OPTS='--dns ${IP} --dns 8.8.8.8 --dns-search service.consul'" > /etc/default/docker
 service docker restart
+# HACK: wait a little while docker starts
+sleep 3
 
 # generated using
 # docker run --rm progrium/consul cmd:run ${IP} -d
@@ -49,3 +51,5 @@ docker run -d \
     -p 6379:6379 \
     -e "SERVICE_TAGS=persistent" \
     redis
+
+echo "private network (eth1) IP address id $IP"
