@@ -16,7 +16,7 @@ sleep 3
 docker run \
     --name consul \
     --restart=always \
-    -h $HOSTNAME \
+    -h ${HOSTNAME} \
     -p ${IP}:8300:8300 \
     -p ${IP}:8301:8301 \
     -p ${IP}:8301:8301/udp \
@@ -32,24 +32,9 @@ docker run \
 
 docker run -d \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -h $HOSTNAME \
+    -h ${HOSTNAME} \
     --restart=always \
     --name registrator \
     progrium/registrator consul://${IP}:8500
-
-mkdir -p /data/redis
-chown -R vagrant:vagrant /data
-
-# for more redis config options, see:
-# https://registry.hub.docker.com/_/redis/
-
-docker run -d \
-    --name redis \
-    --restart=always \
-    -h $HOSTNAME \
-    -v /data/redis:/data \
-    -p 6379:6379 \
-    -e "SERVICE_TAGS=persistent" \
-    redis
 
 echo "private network (eth1) IP address id $IP"
