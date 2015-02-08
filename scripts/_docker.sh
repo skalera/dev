@@ -36,5 +36,3 @@ docker run -d \
     --restart=always \
     --name registrator \
     progrium/registrator consul://${IP}:8500
-
-echo "private network (eth1) IP address id $IP"
