@@ -31,7 +31,7 @@ docker run \
     -bootstrap
 
 docker run -d \
-    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /var/run/docker.sock:/tmp/docker.sock \
     -h ${HOSTNAME} \
     --restart=always \
     --name registrator \
