@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
   config.vm.define 'dev' do |dev|
-    dev.vm.box = 'skalera/dev'
+    dev.vm.box = ENV['BOX_NAME'] || 'skalera/dev'
     dev.vm.hostname = 'dev'
     dev.vm.network 'private_network', type: 'dhcp'
     dev.vm.provision 'shell', path: 'scripts/_docker.sh'

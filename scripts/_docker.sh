@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'running docker setup...'
+
 set -e
 
 IP=`ifconfig eth1 | grep 'inet addr' | sed 's/.*addr:\([0-9.]*\) .*/\1/'`
@@ -35,4 +37,4 @@ docker run -d \
     -h ${HOSTNAME} \
     --restart=always \
     --name registrator \
-    progrium/registrator consul://${IP}:8500
+    gliderlabs/registrator consul://${IP}:8500

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'running redis setup...'
+
 REDIS_DIR=/data/redis
 mkdir -p ${REDIS_DIR}
 chown -R vagrant:vagrant ${REDIS_DIR}

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo 'running postgre setup...'
+
 POSTGRES_DIR=/data/postgres
 
 mkdir -p ${POSTGRES_DIR}
