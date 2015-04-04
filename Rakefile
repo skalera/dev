@@ -38,7 +38,7 @@ end
 
 desc 'upload VM to S3'
 task :upload do
-  sh "s3cmd --acl-public put skalera-dev-#{version}.box s3://skalera/vagrant"
+  sh "s3cmd --acl-public put skalera-dev-#{version}.box s3://skalera/vagrant/skalera-dev-#{version}.box"
 end
 
 desc 'release new box version'
