@@ -12,4 +12,4 @@ echo 'eval "$(rbenv init -)"' >> /home/vagrant/.bash_profile
 
 su - vagrant -c "rbenv install 2.2.1"
 su - vagrant -c "rbenv global 2.2.1"
-su - vagrant -c "gem install bundler"
+su - vagrant -c "gem install bundler pry"

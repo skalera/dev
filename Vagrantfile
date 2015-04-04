@@ -9,7 +9,7 @@ Vagrant.configure(2) do |config|
     dev.vm.provision 'shell', path: 'scripts/_docker.sh'
 
     # load all files in scripts
-    scripts = Dir.glob('scripts/*.sh').reject { |file| file.match(%r{/_}) }
+    scripts = Dir.glob('scripts/*.sh').reject { |file| file.match(/\/_/) }
 
     scripts.each do |script|
       dev.vm.provision 'shell', path: script
@@ -20,6 +20,4 @@ Vagrant.configure(2) do |config|
     # if you want to test a docker repo from your host, e.g. influxdb, uncomment this:
     # dev.vm.synced_folder '../influxdb-docker/', '/docker'
   end
-
 end
-

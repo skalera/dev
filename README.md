@@ -36,11 +36,12 @@ If you want a shell inside a container, use
 if you need additional packages (busybox is stripped down) use `opkg-install`, e.g. to get `curl`
 
     opkg-install curl
-if you have an older laptop with less than 4 cores, add this to the Vagrantfile
+
+If you want to run with more than 2 vCPUs, add this to the Vagrantfile
 
     config.vm.provider '#{PROVIDER}' do |provider|
-      provider.cpus = "2"
+      provider.cpus = "4"
     end
 
 ## VM template
-The VM is built using `packer` and [this configuration](https://github.com/skalera/packer-dev)
+The VM is built using `packer` and [this configuration](https://github.com/skalera/dev/blob/master/dev.json)

@@ -25,6 +25,13 @@ docker pull skalera/influxdb
 docker pull mongo
 docker pull griff/errbit
 
+if [ -z "${DOCKER_PASSWORD}" ]; then
+    echo "DOCKER_PASSWORD not set, skipping skalera/sidekiq"
+else
+    docker login -u skalerajenkins -e martin.englund@skalera.com -p ${DOCKER_PASSWORD}
+    docker pull skalera/sidekiq
+fi
+
 # add influx and envconsul command to VM image
 wget -O /usr/bin/influx https://s3-us-west-2.amazonaws.com/skalera/vagrant/influx-0.9.0_rc16
 wget -O /usr/bin/envconsul https://s3-us-west-2.amazonaws.com/skalera/vagrant/envconsul

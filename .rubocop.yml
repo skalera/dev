@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - '.vagrant/**'
+
+Metrics/LineLength:
+  Max: 120
