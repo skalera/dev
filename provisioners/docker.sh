@@ -33,6 +33,6 @@ else
 fi
 
 # add influx and envconsul command to VM image
-wget -O /usr/bin/influx https://s3-us-west-2.amazonaws.com/skalera/vagrant/influx-0.9.0_rc16
+wget -O /usr/bin/influx https://s3-us-west-2.amazonaws.com/skalera/vagrant/influx-0.9.0_rc18
 wget -O /usr/bin/envconsul https://s3-us-west-2.amazonaws.com/skalera/vagrant/envconsul
 chmod 755 /usr/bin/influx /usr/bin/envconsul

@@ -1,7 +1,12 @@
-require 'rspec/core/rake_task'
+begin
+  require 'rspec/core/rake_task'
+rescue LoadError
+  puts('have you forgotten to run "bundle"?')
+  exit(1)
+end
 
 # TODO: load version from file
-version = '1.1.4'
+version = '1.2.0'
 
 task default: [:build, :validate, :upload, :release]
 

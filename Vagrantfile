@@ -18,6 +18,6 @@ Vagrant.configure(2) do |config|
     dev.vm.provision 'shell', path: 'scripts/_ip.sh'
 
     # if you want to test a docker repo from your host, e.g. influxdb, uncomment this:
-    # dev.vm.synced_folder '../influxdb-docker/', '/docker'
+    # dev.vm.synced_folder '../influxdb-docker/', '/influxdb'
   end
 end
