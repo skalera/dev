@@ -6,7 +6,7 @@ rescue LoadError
 end
 
 # TODO: load version from file
-version = '1.2.0'
+version = '1.2.1'
 
 task default: [:build, :validate, :upload, :release]
 
@@ -27,6 +27,7 @@ task :validate do
     sh "vagrant box add --name #{box_name} skalera-dev-#{version}.box"
     begin
       sh 'vagrant up'
+      sleep(5) # git it some time to start all docker containers
       sh 'vagrant ssh -c "cd /vagrant && bundle && bundle exec rake rspec"'
     ensure
       sh 'vagrant destroy -f'
