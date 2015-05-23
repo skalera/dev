@@ -12,6 +12,7 @@ docker run -d \
     -e POSTGRES_PASSWORD='postgres' \
     -p 5432:5432 \
     -v ${POSTGRES_DIR}:/var/lib/postgresql/data \
+    --restart=always \
     postgres
 
 # TODO: move this into Vagrant box instead
