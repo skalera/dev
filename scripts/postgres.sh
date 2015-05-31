@@ -16,4 +16,5 @@ docker run -d \
     postgres
 
 # TODO: move this into Vagrant box instead
+apt-get -y -q update
 apt-get -y -q install postgresql-client

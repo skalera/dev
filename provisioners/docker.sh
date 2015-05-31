@@ -24,6 +24,7 @@ docker pull postgres
 docker pull skalera/influxdb
 docker pull mongo
 docker pull griff/errbit
+docker pull library/elasticsearch
 
 # add influx and envconsul command to VM image
 wget -O /usr/bin/influx https://s3-us-west-2.amazonaws.com/skalera/vagrant/influx-0.9.0_rc29
