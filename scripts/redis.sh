@@ -16,3 +16,5 @@ docker run -d \
     -p 6379:6379 \
     -e "SERVICE_TAGS=persistent" \
     redis
+
+# TODO: auto-generate a redis password

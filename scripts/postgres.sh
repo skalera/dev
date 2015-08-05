@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo 'running postgre setup...'
+echo 'running postgres setup...'
 
 POSTGRES_DIR=/data/postgres
 
@@ -15,6 +15,21 @@ docker run -d \
     --restart=always \
     postgres
 
-# TODO: move this into Vagrant box instead
-apt-get -y -q update
-apt-get -y -q install postgresql-client
+sleep 3
+
+IP=`ifconfig eth1 | grep 'inet addr' | sed 's/.*addr:\([0-9.]*\) .*/\1/'`
+
+USER='skalera'
+PASSWORD=`dd bs=8 count=1 if=/dev/random 2> /dev/null | od -x | head -1 | sed -e 's/000000 //' -e 's/ //g'`
+
+curl -s -d "${USER}" -X PUT http://${IP}:8500/v1/kv/postgres/user
+curl -s -d "${PASSWORD}" -X PUT http://${IP}:8500/v1/kv/postgres/password
+
+export PGUSER=postgres
+export PGPASSWORD=postgres
+export PGHOST=${IP}
+
+psql -c "create role skalera unencrypted password '${PASSWORD}' login"
+
+createdb -O ${USER} -U postgres -h ${IP} clockwork
+createdb -O ${USER} -U postgres -h ${IP} skalera

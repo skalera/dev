@@ -6,7 +6,7 @@ rescue LoadError
 end
 
 # TODO: load version from file
-version = '1.2.1'
+version = '1.4.0'
 
 task default: [:build, :validate, :upload, :release]
 
