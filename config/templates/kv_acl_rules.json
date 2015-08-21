@@ -1,0 +1,6 @@
+{                      
+	"ID": "${CONSUL_KV_KEY}",
+        "Name": "kv_read_write_access",
+        "Type": "client",
+        "Rules": "key \"\" { policy = \"write\" }"
+}
