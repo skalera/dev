@@ -3,7 +3,7 @@
 . /vagrant/config/consul.env
 
 echo 'running influxdb setup...'
-echo $CONSUL_KV_KEY
+echo ${CONSUL_KV_KEY}
 
 INFLUX_DIR=/data/influxdb
 mkdir -p ${INFLUX_DIR}
@@ -19,12 +19,13 @@ docker run -d \
     -p 127.0.0.1:8088:8088 \
     skalera/influxdb
 
+# TODO: instead loop a few times for a max of 10 seconds
 sleep 3
 
 IP=`ifconfig eth1 | grep 'inet addr' | sed 's/.*addr:\([0-9.]*\) .*/\1/'`
 
 USER='skalera'
-PASSWORD=`dd bs=8 count=1 if=/dev/random 2> /dev/null | od -x | head -1 | sed -e 's/000000 //' -e 's/ //g'`
+PASSWORD=`uuid`
 
 curl -s -d "${USER}" -X PUT http://${IP}:8500/v1/kv/influxdb/user?token=${CONSUL_KV_KEY}
 curl -s -d "${PASSWORD}" -X PUT http://${IP}:8500/v1/kv/influxdb/password?token=${CONSUL_KV_KEY}

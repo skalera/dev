@@ -8,6 +8,11 @@ Vagrant.configure(2) do |config|
     dev.vm.network 'private_network', type: 'dhcp'
     dev.vm.provision 'shell', path: 'scripts/_docker.sh'
 
+    dev.vm.provider 'vmware_fusion' do |fusion|
+      fusion.vmx["memsize"] = "4096"
+      fusion.vmx["numvcpus"] = "2"
+    end
+
     # load all files in scripts
     scripts = Dir.glob('scripts/*.sh').reject { |file| file.match(/\/_/) }
 

@@ -12,6 +12,6 @@ echo 'eval "$(rbenv init -)"' >> /home/vagrant/.bash_profile
 chown vagrant:vagrant /home/vagrant/.bash_profile
 
 echo 'gem: --no-rdoc --no-ri' > /etc/gemrc
-su - vagrant -c "rbenv install 2.2.2"
-su - vagrant -c "rbenv global 2.2.2"
+su - vagrant -c "rbenv install 2.2.3"
+su - vagrant -c "rbenv global 2.2.3"
 su - vagrant -c "gem install bundler pry"

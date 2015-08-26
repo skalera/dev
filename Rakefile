@@ -6,12 +6,13 @@ rescue LoadError
 end
 
 # TODO: load version from file
-version = '1.4.0'
+version = '1.5.0'
 
 task default: [:build, :validate, :upload, :release]
 
 desc 'build the VM using packer'
 task :build do
+  # TODO: make rake refuse to run when the packer version is out of date
   sh 'packer build dev.json'
   FileUtils.mv('skalera-dev.box', "skalera-dev-#{version}.box")
   FileUtils.mv('skalera-dev.ovf', "skalera-dev-#{version}.ovf")
