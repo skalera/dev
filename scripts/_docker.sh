@@ -8,8 +8,8 @@ function create_consul_config {
   echo "creating consul config..."
   CONSUL_DIR=/data/consul
   mkdir -p ${CONSUL_DIR}
-  # export CONSUL_MASTER_KEY=`uuid`
-  export CONSUL_MASTER_KEY=f45cbd0b-5022-47ab-8640-4eaa7c1f40f1 #TEST 
+  export CONSUL_MASTER_KEY=`uuid`
+  # export CONSUL_MASTER_KEY=f45cbd0b-5022-47ab-8640-4eaa7c1f40f1 #TEST 
   envsubst < /vagrant/config/templates/consul_config_template.json > /data/consul/consul.json
 }
 function update_anon_acl {
