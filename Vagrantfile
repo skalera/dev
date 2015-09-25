@@ -6,6 +6,12 @@ Vagrant.configure(2) do |config|
     dev.vm.box = ENV['BOX_NAME'] || 'skalera/dev'
     dev.vm.hostname = 'dev'
     dev.vm.network 'private_network', type: 'dhcp'
+
+    dev.vm.provider 'vmware_fusion' do |fusion|
+      fusion.vmx['memsize'] = '8192'
+      fusion.vmx['numvcpus'] = '4'
+    end
+
     dev.vm.provision 'shell', path: 'scripts/_docker.sh'
 
     # load all files in scripts
@@ -14,6 +20,10 @@ Vagrant.configure(2) do |config|
     scripts.each do |script|
       dev.vm.provision 'shell', path: script
     end
+
+    # config.vm.provision 'chef_solo' do |chef|
+    #   chef.add_recipe 'gvm'
+    # end
 
     dev.vm.provision 'shell', path: 'scripts/_ip.sh'
 

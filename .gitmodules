@@ -1,0 +1,6 @@
+[submodule "cookbooks/gvm"]
+	path = cookbooks/gvm
+	url = git@github.com:skalera/chef-gvm.git
+[submodule "cookbooks/rbenv"]
+	path = cookbooks/rbenv
+	url = git@github.com:chef-rbenv/chef-rbenv.git
