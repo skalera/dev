@@ -24,10 +24,10 @@ function update_anon_acl {
 
 function create_kv_acl {
   echo "adding K/V Store ACL..."
-  export CONSUL_KV_KEY=`curl -f -s -d @/vagrant/config/templates/kv_acl.json \
+  export CONSUL_ACL_TOKEN=`curl -f -s -d @/vagrant/config/templates/kv_acl.json \
     -X PUT http://${IP}:8500/v1/acl/create?token=${CONSUL_MASTER_KEY}| \
     awk -F: '{print $2}'|sed 's/"//g'|tr -d '{}'`
-  if [ -z "${CONSUL_KV_KEY}" ]; then
+  if [ -z "${CONSUL_ACL_TOKEN}" ]; then
     echo "ERR: Failed to add K/V ACL.."
     exit 1
   fi
@@ -52,8 +52,8 @@ function clean_up {
 function report {
   echo "***************** Report *****************"
   echo "Please use this token to connect to consul"
-  echo ${CONSUL_KV_KEY}
-  echo "export CONSUL_KV_KEY={$CONSUL_KV_KEY}" > /vagrant/config/consul.env
+  echo ${CONSUL_ACL_TOKEN}
+  echo "export CONSUL_ACL_TOKEN=${CONSUL_ACL_TOKEN}" > /vagrant/config/consul.env
 }
 
 IP=`ifconfig eth1 | grep 'inet addr' | sed 's/.*addr:\([0-9.]*\) .*/\1/'`

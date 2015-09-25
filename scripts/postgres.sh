@@ -25,8 +25,8 @@ IP=`ifconfig eth1 | grep 'inet addr' | sed 's/.*addr:\([0-9.]*\) .*/\1/'`
 USER='skalera'
 PASSWORD=`uuid`
 
-curl -s -d "${USER}" -X PUT http://${IP}:8500/v1/kv/postgres/user?token=${CONSUL_KV_KEY}
-curl -s -d "${PASSWORD}" -X PUT http://${IP}:8500/v1/kv/postgres/password?token=${CONSUL_KV_KEY}
+curl -s -d "${USER}" -X PUT http://${IP}:8500/v1/kv/postgres/user?token=${CONSUL_ACL_TOKEN}
+curl -s -d "${PASSWORD}" -X PUT http://${IP}:8500/v1/kv/postgres/password?token=${CONSUL_ACL_TOKEN}
 
 export PGUSER=postgres
 export PGPASSWORD=postgres

@@ -3,7 +3,7 @@
 . /vagrant/config/consul.env
 
 echo 'running influxdb setup...'
-echo ${CONSUL_KV_KEY}
+echo ${CONSUL_ACL_TOKEN}
 
 INFLUX_DIR=/data/influxdb
 mkdir -p ${INFLUX_DIR}
@@ -27,8 +27,8 @@ IP=`ifconfig eth1 | grep 'inet addr' | sed 's/.*addr:\([0-9.]*\) .*/\1/'`
 USER='skalera'
 PASSWORD=`uuid`
 
-curl -s -d "${USER}" -X PUT http://${IP}:8500/v1/kv/influxdb/user?token=${CONSUL_KV_KEY}
-curl -s -d "${PASSWORD}" -X PUT http://${IP}:8500/v1/kv/influxdb/password?token=${CONSUL_KV_KEY}
+curl -s -d "${USER}" -X PUT http://${IP}:8500/v1/kv/influxdb/user?token=${CONSUL_ACL_TOKEN}
+curl -s -d "${PASSWORD}" -X PUT http://${IP}:8500/v1/kv/influxdb/password?token=${CONSUL_ACL_TOKEN}
 
 INFLUX="influx -host ${IP} -username root -password root"
 # TODO: change root's password
@@ -36,4 +36,3 @@ INFLUX="influx -host ${IP} -username root -password root"
 echo 'create database metrics' | ${INFLUX} -database root
 echo "create user ${USER} with password '{$PASSWORD}'" | ${INFLUX}
 echo "grant all on metrics to ${USER}" | ${INFLUX}
-echo 'create retention policy "default" on "metrics" duration 1m replication 1 default' | ${INFLUX} -database metrics

@@ -1,5 +1,5 @@
 {                      
-	"ID": "${CONSUL_KV_KEY}",
+	"ID": "${CONSUL_ACL_TOKEN}",
         "Name": "kv_read_write_access",
         "Type": "client",
         "Rules": "key \"\" { policy = \"write\" }"
