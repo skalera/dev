@@ -32,6 +32,12 @@ export PGUSER=postgres
 export PGPASSWORD=postgres
 export PGHOST=${IP}
 
+# make sure we can connect, if not wait a little longer
+psql -c "select version();" > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    sleep 5
+fi
+
 psql -c "create role skalera unencrypted password '${PASSWORD}' login"
 
 createdb -O ${USER} -U postgres -h ${IP} clockwork

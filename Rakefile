@@ -15,7 +15,7 @@ task :build do
   # TODO: make rake refuse to run when the packer version is out of date
   sh 'packer build dev.json'
   FileUtils.mv('skalera-dev.box', "skalera-dev-#{version}.box")
-  FileUtils.mv('skalera-dev.ovf', "skalera-dev-#{version}.ovf")
+  # FileUtils.mv('skalera-dev.ovf', "skalera-dev-#{version}.ovf")
 end
 
 desc 'validate VM functionality'
