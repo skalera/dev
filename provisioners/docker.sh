@@ -29,8 +29,8 @@ docker pull skalera/logspout # TODO: hook this up correctly
 docker pull skalera/clockwork
 
 # add influx and envconsul command to VM image
-wget -O /usr/bin/influx https://s3-us-west-2.amazonaws.com/skalera/vagrant/influx-0.9.6.1
-wget -O /usr/bin/influxd https://s3-us-west-2.amazonaws.com/skalera/vagrant/influxd-0.9.6.1
+wget -O /usr/bin/influx https://s3-us-west-2.amazonaws.com/skalera/vagrant/influx-0.10.0
+wget -O /usr/bin/influxd https://s3-us-west-2.amazonaws.com/skalera/vagrant/influxd-0.10.0
 wget -O /usr/bin/envconsul https://s3-us-west-2.amazonaws.com/skalera/vagrant/envconsul
 chmod 755 /usr/bin/influx* /usr/bin/envconsul
 
