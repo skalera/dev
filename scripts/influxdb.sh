@@ -33,6 +33,17 @@ curl -s -d "${PASSWORD}" -X PUT http://${IP}:8500/v1/kv/influxdb/password?token=
 INFLUX="influx -host ${IP} -username root -password root"
 # TODO: change root's password
 
-echo 'create database metrics' | ${INFLUX} -database root
 echo "create user ${USER} with password '{$PASSWORD}'" | ${INFLUX}
+
+echo 'create database metrics' | ${INFLUX} -database root
+echo 'create database alerts' | ${INFLUX} -database root
+
 echo "grant all on metrics to ${USER}" | ${INFLUX}
+echo "grant all on alerts to ${USER}" | ${INFLUX}
+
+# TODO: define retentin policy for alerts
+
+echo 'create RETENTION POLICY "raw" ON "metrics" DURATION 1h REPLICATION 1' | ${INFLUX}
+echo 'create RETENTION POLICY "short" ON "metrics" DURATION 1w REPLICATION 1' | ${INFLUX}
+echo 'create RETENTION POLICY "long" ON "metrics" DURATION 4w REPLICATION 1' | ${INFLUX}
+echo 'create RETENTION POLICY "forever" ON "metrics" DURATION INF REPLICATION 1' | ${INFLUX}

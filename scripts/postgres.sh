@@ -42,4 +42,5 @@ psql -c "create role skalera unencrypted password '${PASSWORD}' login"
 
 createdb -O ${USER} -U postgres -h ${IP} clockwork
 createdb -O ${USER} -U postgres -h ${IP} skalera
+createdb -O ${USER} -U postgres -h ${IP} thresholds
 createdb -O ${USER} -U postgres -h ${IP} mvp-ui
