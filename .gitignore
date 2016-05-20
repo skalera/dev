@@ -1,6 +1,0 @@
-config/consul.env
-.vagrant
-.idea
-packer_cache/
-*.box
-*.ovf

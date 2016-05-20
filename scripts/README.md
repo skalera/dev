@@ -1,1 +1,0 @@
-These files are used when Vagrant has created the VM and sets up the services in it

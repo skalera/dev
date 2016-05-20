@@ -1,1 +1,0 @@
-These files are run when packer builds the VM image
